@@ -2,7 +2,7 @@
 
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
 version 0.15.1.
-## Créer un projet angular:
+## Create angular project:
    	Download node.js windows msi
    	npm install -g yo grunt-cli bower
    	npm install -g generator-angular
