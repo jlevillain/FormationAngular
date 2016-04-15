@@ -1,0 +1,46 @@
+<noscript>
+		<h1>
+			 {{ 'Javascript.without' | i18n }}
+		</h1>
+	</noscript>
+	<header class="navbar navbar-inverse">
+		<h1 class="fill">
+      <a href="/">{{ 'Application.name' | i18n }}</a>
+			<!--
+      <tags:url servlet="DashBoard">
+				<spring:message code="Application.name" text="default" />
+			</tags:url>
+      -->
+      <!--
+			<span style="float: right"> <c:url
+					value="/j_spring_security_logout" var="logoutUrl" /> <!-- csrt for log out-->
+      <!--
+				<form action="${logoutUrl}" method="post" id="logoutForm">
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</form> <script>
+					function formSubmit() {
+						document.getElementById("logoutForm").submit();
+					}
+				</script> <c:if test="${pageContext.request.userPrincipal.name != null}">
+      -->
+  <!--
+  <h4>
+    {{ 'Header.welcome' | i18n"}}
+     : ${pageContext.request.userPrincipal.name} | <a
+    href="javascript:formSubmit()"> {{'Header.logout' | i18n}}</a>
+
+  </h4>
+  -->
+<!--</c:if> <c:if test="${not empty msg}">
+  <div class="btn btn-success">${msg}</div>
+</c:if> -->
+  <span style="float: right">
+    <a href="?lang=en"><img
+    src='images/anglais.png' /></a> | <a
+    href="?lang=fr"><img
+    src='images/francais.png' /></a>
+  </span>
+  <!-- <a href="DashBoard?search=&page=1"> Application - Computer Database </a> -->
+  </h1>
+  </header>

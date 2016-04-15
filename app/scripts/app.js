@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'i18n'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -24,7 +25,7 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/about', {
+      .when('/AddComputer', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
@@ -33,3 +34,13 @@ angular
         redirectTo: '/'
       });
   });
+
+  var i18n = angular.module('i18n');
+    i18n.config(['i18nServiceProvider', function(i18nServiceProvider) {
+        //Set Locales for service
+        i18nServiceProvider.setLocales({
+          'default': '../../i18n/resources-locale_en_US.json',
+          'en': '../../i18n/resources-locale_en_US.json',
+          'fr-FR': '../../i18n/resources-locale_fr.json',
+      }, true);
+    }]);

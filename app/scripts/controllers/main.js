@@ -11,9 +11,9 @@
   angular.module('formationAngularApp')
     .controller('MainCtrl', MainCtrl);
 
-    MainCtrl.$inject = ['ComputerService', 'CompanyService']
+    MainCtrl.$inject = ['$scope', 'ComputerService', 'CompanyService']
 
-    function MainCtrl(ComputerService, CompanyService) {
+    function MainCtrl($scope, ComputerService, CompanyService) {
       var vm = this;
       vm.page = {};
       vm.companyList = {};
@@ -22,6 +22,7 @@
         'AngularJS',
         'Karma'
       ];
+      vm.computerSize = 100;
       ComputerService.getAll().then(function(data) {
           vm.page = data;
           console.log(vm.page);
@@ -53,6 +54,12 @@
           console.log(vm.companyList);
           return vm.companyList;
       });
-
+      $scope.deleteComputer = function(url,text) {
+      	var r = confirm(text);
+      	if (r == true)
+      	  {
+      			window.location.href = url;
+      	  }
+      }
     }
 })();

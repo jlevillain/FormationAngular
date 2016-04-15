@@ -1,23 +1,68 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
+<section id="main">
+  <h1 id="homeTitle"><!--  456-->{{ main.computerSize }} {{ 'foundComputer.title' | i18n }}
+   <!-- <c:if test="${page.search!=''}">with "{{main.search}"</c:if></h1>-->
+  <div id="actions">
+    <form class="form-inline" action="" method="GET">
+      <input class="form-control" type="search" id="searchbox" name="search"
+             value="{{main.search}}" placeholder="{{searchComputer.title | i18n}}">
+      <input type="hidden" name="page" value="1">
+      <input type="hidden" name="orderBy" value="{{main.orderBy}}">
+      <input type="hidden" name="isDesc" value="{{main.desc}}">
+      <input type="hidden" name="nbPage" value="{{main.nbPage}}">
+      <input type="submit" id="searchsubmit"
+             value="{{ 'filterComputer.title' | i18n }}"
+             class="btn btn-primary">
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
+    </form>
+    <a class="btn btn-success" id="add" href="/#AddComputer">{{ 'addComputer.title' | i18n}}</a>
+  </div>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <!-- Variable declarations for passing labels as parameters -->
+      <!-- Table header for Computer Name -->
 
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
+      <th><a href="${servlet}?search=${search}&page=${pageNumber}&orderBy=${orderBy}&isDesc=${isDesc}&nbPage=${nbPage}">{{ 'Computer.title.name' | i18n }}</a></th>
+      <th><a href="${servlet}?search=${search}&page=${pageNumber}&orderBy=${orderBy}&isDesc=${isDesc}&nbPage=${nbPage}">{{ 'Computer.title.introduced' | i18n }}</a></th>
+      <!-- Table header for Discontinued Date -->
+      <th><a href="${servlet}?search=${search}&page=${pageNumber}&orderBy=${orderBy}&isDesc=${isDesc}&nbPage=${nbPage}">{{ 'Computer.title.discontinued' | i18n }}</a></th>
+      <!-- Table header for Company -->
+      <th><a href="${servlet}?search=${search}&page=${pageNumber}&orderBy=${orderBy}&isDesc=${isDesc}&nbPage=${nbPage}">{{ 'Computer.title.company' | i18n }}</a></th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <c:forEach var="item" items="${page.computerList}">
+      <tr><td><a href="UpdateComputer?id=${item.id}">${item.name}</a></td><td>${item.introduced} </td><td>${item.discontinued}</td><td>${item.company.name }</td><td><a class="btn btn-danger" onclick="deleteComputer('DeleteComputer?delete=${item.id}','<spring:message code="Delete.message" text="default"/>')"><spring:message code="deleteComputer.title" text="default"/></a></td></tr>
+    </c:forEach>
+    <!--
+           <tr>
+               <td><a href="#" onclick="">ThinkPad T420</a></td>
+               <td>2011-01-01</td>
+               <td>2013-03-04</td>
+               <td>Lenovo</td>
+           </tr>
+           <tr>
+               <td><a href="#">Precision 3500</a></td>
+               <td>2010-05-07</td>
+               <td>2012-06-01</td>
+               <td>Dell</td>
+           </tr>
+           <tr>
+               <td><a href="#">Macbook Air</a></td>
+               <td>2005-05-09</td>
+               <td>2008-06-06</td>
+               <td>Apple</td>
+           </tr>
+           -->
+    </tbody>
+  </table>
+
+  <fmt:formatNumber var="nbPages" value="${page.computerSize/page.nbPage}"  maxFractionDigits="0" />
+  <c:if test="${(page.computerSize/page.nbPage)-nbPages > 0}">
+    <c:set var="nbPages" value="${nbPages+1}"></c:set>
+  </c:if>
+  <tags:pagination begin="1" end="${nbPages}" interval="${page.interval}" page="${page.page }" search="${page.search}" orderBy="${page.orderBy}" isDesc="${page.isDesc()}" nbPage="${page.nbPage}"></tags:pagination>
+
+</section>
