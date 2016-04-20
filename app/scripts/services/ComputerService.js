@@ -38,8 +38,9 @@
       }
 
       function getPage(search, page, orderBy, isDesc, nbPage) {
+        console.log(search);
         return $http.get(VM+PATH+
-          '/getAll?search'+search+
+          '/getAll?search='+search+
           '&page='+page+
           '&orderBy='+orderBy+
           '&isDesc='+isDesc+

@@ -4,17 +4,20 @@
   <div id="actions">
     <form class="form-inline" action="" method="GET">
       <input class="form-control" type="search" id="searchbox" name="search"
-             value="{{main.search}}" placeholder="{{searchComputer.title | i18n}}">
-      <input type="hidden" name="page" value="1">
-      <input type="hidden" name="orderBy" value="{{main.orderBy}}">
-      <input type="hidden" name="isDesc" value="{{main.desc}}">
-      <input type="hidden" name="nbPage" value="{{main.nbPage}}">
-      <input type="submit" id="searchsubmit"
+             ng-model="submitSearch" ng-model="submitSearch" value="{{main.search}}" placeholder="{{searchComputer.title | i18n}}">
+      <!--
+      <input type="hidden" name="page" ng-model="submitPageNumber" value="1">
+      <input type="hidden" name="orderBy" ng-model="submitOrderBy" value="{{main.orderBy}}">
+      <input type="hidden" name="isDesc" ng-model="submitIsDesc" value="{{main.isDesc}}">
+      <input type="hidden" name="nbPage" ng-model="submitNbPage" value="{{main.nbPage}}">
+      <!--<input type="submit" id="searchsubmit"
              value="{{ 'filterComputer.title' | i18n }}"
-             class="btn btn-primary">
+             class="btn btn-primary">-->
+      <a  id="searchsubmit" class="btn btn-primary" ng-href="/#/?search={{submitSearch}}&page={{main.pageNumber}}&orderBy={{main.orderBy}}&isDesc={{main.isDesc}}&nbPage={{main.nbPage}}">{{ 'filterComputer.title' | i18n }}</a></th>
+      <th>
 
     </form>
-    <a class="btn btn-success" id="add" href="/#AddComputer">{{ 'addComputer.title' | i18n}}</a>
+    <a class="btn btn-success" id="add" ng-href="/#AddComputer">{{ 'addComputer.title' | i18n}}</a>
   </div>
 
   <table class="table table-striped">
@@ -23,20 +26,26 @@
       <!-- Variable declarations for passing labels as parameters -->
       <!-- Table header for Computer Name -->
 
-      <th><a href="${servlet}?search=${search}&page=${pageNumber}&orderBy=${orderBy}&isDesc=${isDesc}&nbPage=${nbPage}">{{ 'Computer.title.name' | i18n }}</a></th>
-      <th><a href="${servlet}?search=${search}&page=${pageNumber}&orderBy=${orderBy}&isDesc=${isDesc}&nbPage=${nbPage}">{{ 'Computer.title.introduced' | i18n }}</a></th>
+      <th><a ng-href="/#/?search={{main.search}}&page={{main.pageNumber}}&orderBy=2&isDesc={{(main.isDesc == false)?main.isDesc=true:main.isDesc=false}}&nbPage={{main.nbPage}}">{{ 'Computer.title.name' | i18n }}</a></th>
+      <th><a ng-href="/#/?search={{main.search}}&page={{main.pageNumber}}&orderBy=3&isDesc={{(main.isDesc == false)?main.isDesc=true:main.isDesc=false}}&nbPage={{main.nbPage}}">{{ 'Computer.title.introduced' | i18n }}</a></th>
       <!-- Table header for Discontinued Date -->
-      <th><a href="${servlet}?search=${search}&page=${pageNumber}&orderBy=${orderBy}&isDesc=${isDesc}&nbPage=${nbPage}">{{ 'Computer.title.discontinued' | i18n }}</a></th>
+      <th><a ng-href="/#/?search={{main.search}}&page={{main.pageNumber}}&orderBy=4&isDesc={{(main.isDesc == false)?main.isDesc=true:main.isDesc=false}}&nbPage={{main.nbPage}}">{{ 'Computer.title.discontinued' | i18n }}</a></th>
       <!-- Table header for Company -->
-      <th><a href="${servlet}?search=${search}&page=${pageNumber}&orderBy=${orderBy}&isDesc=${isDesc}&nbPage=${nbPage}">{{ 'Computer.title.company' | i18n }}</a></th>
+      <th><a ng-href="/#/?search={{main.search}}&page={{main.pageNumber}}&orderBy=6&isDesc={{(main.isDesc == false)?main.isDesc=true:main.isDesc=false}}&nbPage={{main.nbPage}}">{{ 'Computer.title.company' | i18n }}</a></th>
     </tr>
     </thead>
     <tbody>
-
-    <c:forEach var="item" items="${page.computerList}">
-      <tr><td><a href="UpdateComputer?id=${item.id}">${item.name}</a></td><td>${item.introduced} </td><td>${item.discontinued}</td><td>${item.company.name }</td><td><a class="btn btn-danger" onclick="deleteComputer('DeleteComputer?delete=${item.id}','<spring:message code="Delete.message" text="default"/>')"><spring:message code="deleteComputer.title" text="default"/></a></td></tr>
-    </c:forEach>
-    <!--
+      <tr ng-repeat="item in main.computerList">
+        <td><a href="UpdateComputer?id={{item.id}}">{{item.name}}</a></td>
+        <td>{{item.introduced}}</td>
+        <td>{{item.discontinued}}</td>
+        <td>{{item.company.name}}</td>
+        <td>
+          <a class="btn btn-danger" ng-click="main.deleteComputer(item.id)">
+            {{ 'deleteComputer.title' | i18n }}
+          </a>
+        </td></tr>
+        <!--
            <tr>
                <td><a href="#" onclick="">ThinkPad T420</a></td>
                <td>2011-01-01</td>
@@ -58,11 +67,17 @@
            -->
     </tbody>
   </table>
-
-  <fmt:formatNumber var="nbPages" value="${page.computerSize/page.nbPage}"  maxFractionDigits="0" />
-  <c:if test="${(page.computerSize/page.nbPage)-nbPages > 0}">
-    <c:set var="nbPages" value="${nbPages+1}"></c:set>
-  </c:if>
-  <tags:pagination begin="1" end="${nbPages}" interval="${page.interval}" page="${page.page }" search="${page.search}" orderBy="${page.orderBy}" isDesc="${page.isDesc()}" nbPage="${page.nbPage}"></tags:pagination>
-
+    <div align="center">
+      <ul class="pagination">
+        <li>
+          <a ng-href="/#/?search={{main.search}}&page={{(main.pageNumber-1<main.begin)?main.pageNumber=main.begin:main.pageNumber-1}}&orderBy={{main.orderBy}}&isDesc={{main.isDesc}}&nbPage={{main.nbPage}}">&laquo;</a></th>
+        </li>
+        <li ng-repeat="number in main.pagination track by $index">
+          <a ng-href="/#/?search={{main.search}}&page={{number}}&orderBy={{main.orderBy}}&isDesc={{main.isDesc}}&nbPage={{main.nbPage}}">{{number}}</a></th>
+        </li>
+        <li>
+          <a ng-href="/#/?search={{main.search}}&page={{(main.pageNumber+1>main.end)?main.pageNumber=main.end:main.pageNumber+1}}&orderBy={{main.orderBy}}&isDesc={{main.isDesc}}&nbPage={{main.nbPage}}">&raquo;</a></th>
+        </li>
+      </ul>
+    </div>
 </section>

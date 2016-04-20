@@ -28,7 +28,7 @@ describe('Service: ComputerService', function () {
     var orderBy = 2;
     var isDesc = false;
     var nbPage = 5;
-    httpBackend.expectGET(VM+PATH+'/getAll?search'+search+
+    httpBackend.expectGET(VM+PATH+'/getAll?search='+search+
       '&page='+page+
       '&orderBy='+orderBy+
       '&isDesc='+isDesc+
