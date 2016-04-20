@@ -68,4 +68,14 @@ describe('Service: ComputerService', function () {
 
     httpBackend.flush();
   });
+
+  it('should delete a computer', function() {
+    var id = 2;
+    httpBackend.expectGET(VM+PATH+'/delete?delete='+id).respond(200, '');
+    httpBackend.expectGET('views/main.html').respond(200, '');
+
+    ComputerService.deleteComputer(id);
+
+    httpBackend.flush();
+  });
 });

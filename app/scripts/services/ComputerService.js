@@ -19,7 +19,8 @@
         getPage : getPage,
         getNewComputer : getNewComputer,
         addComputer : addComputer,
-        modifyComputer : modifyComputer
+        modifyComputer : modifyComputer,
+        deleteComputer : deleteComputer
       };
       return service;
 
@@ -56,6 +57,10 @@
 
       function modifyComputer(id) {
         return $http.get(VM+PATH+'/modifyComputer?id='+id).then(success, error);
+      }
+
+      function deleteComputer(id) {
+        return $http.get(VM+PATH+'/delete?delete='+id).then(success, error);
       }
    }
 })();
