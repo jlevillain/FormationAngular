@@ -76,8 +76,7 @@
         }
       }
 
-
-      function init() {
+      function initVariable() {
         vm.computerSize = 0;
         vm.pageNumber = 1;
         vm.search = "";
@@ -86,9 +85,10 @@
         vm.isDesc = false;
         vm.interval = 5;
         vm.begin = 1;
+      }
 
+      function init() {
         var searchObject = $location.search();
-        console.log(searchObject);
 
         if(jQuery.isEmptyObject(searchObject)) {
           ComputerService.getAll().then(function(data) {
@@ -103,7 +103,6 @@
           vm.orderBy = searchObject.orderBy;
           vm.nbPage = searchObject.nbPage;
           vm.isDesc = searchObject.isDesc;
-          console.log(vm.search);
           ComputerService.getPage(vm.search, vm.pageNumber, vm.orderBy, vm.isDesc, vm.nbPage).then(function(data) {
               vm.computerList = data.computerList;
               vm.computerSize = data.computerSize;
@@ -114,8 +113,6 @@
               vm.interval = data.interval;
               vm.nbPage = data.nbPage;
               computeNbPages();
-              console.log(data)
-              console.log(vm.search);
               return vm.computerList;
           });
         }
@@ -148,7 +145,7 @@
           return vm.companyList;
       });
       */
-
+      initVariable();
       init();
     }
 })();
