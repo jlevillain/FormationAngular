@@ -34,28 +34,6 @@
           }
       }
 
-      vm.send = function() {
-        vm.pageNumber = $scope.submitPageNumber;
-        vm.search = $scope.submitSearch;
-        vm.orderBy = $scope.submitOrderBy;
-        vm.nbPage = $scope.submitNbPage;
-        vm.isDesc = $scope.submitIsDesc;
-
-        ComputerService.getPage(vm.search, vm.pageNumber, vm.orderBy, vm.isDesc, vm.nbPage).then(function(data) {
-            vm.computerList = data.computerList;
-            vm.computerSize = data.computerSize;
-            vm.pageNumber = data.page;
-            vm.search = data.search;
-            vm.orderBy = data.orderBy;
-            vm.isDesc = data.desc;
-            vm.interval = data.interval;
-            vm.nbPage = data.nbPage;
-            computeNbPages();
-            console.log(data)
-            return vm.computerList;
-        });
-      }
-
       function computeNbPages () {
         vm.nbPages = Math.floor(vm.computerSize/vm.nbPage);
         if((vm.computerSize/vm.nbPage)-vm.nbPages > 0) {

@@ -18,7 +18,10 @@ describe('Controller: MainCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    window = { confirm : function() {return true}};
+    window = {
+      confirm : function() {return true},
+      location:{reload:function(){return true;}}
+    };
     location = {search : function() {return {}}};
     companyService = {};
     computerService = {
@@ -37,9 +40,18 @@ describe('Controller: MainCtrl', function () {
             });
           }
         };
+      },
+      deleteComputer : function(id) {
+        return {
+          then:function(callback) {
+            return callback("");
+          }
+        }
       }
     }
-    i18nServiceMock = {};
+    i18nServiceMock = {
+      getString : function(message) {return "message"}
+    };
     createController = function() {
       return $controller("MainCtrl", {
         $scope: scope,
@@ -51,15 +63,6 @@ describe('Controller: MainCtrl', function () {
       });
     };
 
-    /*MainCtrl = $controller('MainCtrl', {
-      $scope: scope,
-      // place here mocked dependencies
-      $window : window,
-      $location : location,
-      ComputerService : computerService,
-      CompanyService : companyService,
-      i18nService : i18nServiceMock
-    });*/
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
@@ -78,7 +81,7 @@ describe('Controller: MainCtrl', function () {
     expect(MainCtrl.interval).toBe(5);
     expect(MainCtrl.begin).toBe(1);
     expect(MainCtrl.computerSize).toBe(computerSize);
-    expect(MainCtrl.computerList).toBe(computerList);
+    expect(MainCtrl.computerList).toEqual(computerList);
     expect(MainCtrl.nbPages).toBe(6);
     expect(MainCtrl.pagination.length).toBe(6);
   });
@@ -94,8 +97,34 @@ describe('Controller: MainCtrl', function () {
     expect(MainCtrl.interval).toBe(5);
     expect(MainCtrl.begin).toBe(1);
     expect(MainCtrl.computerSize).toBe(22);
-    expect(MainCtrl.computerList).toBe(computerList);
+    expect(MainCtrl.computerList).toEqual(computerList);
     expect(MainCtrl.nbPages).toBe(5);
     expect(MainCtrl.pagination.length).toBe(5);
+  });
+
+  it("should confirm item deletion", function() {
+    MainCtrl = createController();
+
+    spyOn(window.location, 'reload');
+    spyOn(computerService, 'deleteComputer');
+    spyOn(window, 'confirm').and.returnValue(true);
+
+    MainCtrl.deleteComputer(10);
+    
+    expect(computerService.deleteComputer).toHaveBeenCalledWith(10);
+    expect(window.confirm).toHaveBeenCalled();
+    expect(window.location.reload).toHaveBeenCalled();
+  });
+
+  it('should not confirm item deletion', function() {
+    MainCtrl = createController();
+
+    spyOn(window.location, 'reload');
+    spyOn(computerService, 'deleteComputer');
+    spyOn(window, 'confirm').and.returnValue(false);
+
+    MainCtrl.deleteComputer(10);
+
+    expect(window.confirm).toHaveBeenCalled();
   });
 });
