@@ -26,9 +26,9 @@ angular
         controllerAs: 'main'
       })
       .when('/AddComputer', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+        templateUrl: 'views/computer.html',
+        controller: 'ComputerCtrl',
+        controllerAs: 'computer'
       })
       .otherwise({
         redirectTo: '/'

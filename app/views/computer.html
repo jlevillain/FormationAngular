@@ -1,0 +1,66 @@
+<section id="main">
+
+  <h1>
+      <span ng-if="computer.computer!=null && computer.computer.id!=0">{{ 'editComputer.title' | i18n }}</span>
+      <span ng-if="computer.computer==null || computer.computer.id==0">{{ 'addComputer.title' | i18n }}</span>
+  </h1>
+
+  <div class="container">
+
+      <ul ng-if="error!=null" class="bg-danger">
+          <li ng-repeat="item in computer.error">{{item}}</li>
+      </ul>
+
+    <form id="signupForm" commandName="computer" cssClass="form-horizontal" action="" method="POST">
+      <input type="hidden" path="id" />
+
+
+      <fieldset>
+        <div class="form-group has-feedback">
+          <label class="control-label" for="name">{{ 'Computer.input.name' | i18n }}</label>
+
+          <input id="name" class="form-control" type="text"
+                      path="name" placeholder="{{ 'Computer.label.name' | i18n }}"/><errors path="name" cssClass="bg-danger" />
+        </div>
+        <div class="form-group has-feedback">
+          <label class="control-label" for="introduced">{{'Computer.input.introduced' | i18n}}</label>
+          {{ 'Date.pattern.text' | i18n}}
+          <input id="introduced" class="form-control" type="text"
+                      path="introduced" placeholder="{{ 'Date.pattern.text' | i18n}}" />
+          <errors path="introduced" cssClass="bg-danger" />
+        </div>
+        <div class="form-group has-feedback">
+          <label class="control-label" for="discontinued">{{'Computer.input.discontinued' | i18n }}</label>
+
+          <input id="discontinued" class="form-control" type="text"
+                      path="discontinued" placeholder="{{'Date.pattern.text' | i18n}}" />
+          <errors path="discontinued" cssClass="bg-danger" />
+        </div>
+        <div class="form-group has-feedback">
+          <label for="company">{{ 'Computer.input.company' | i18n }}</label>
+          <select id="company" path="company.id" valueItem="company.id" class="form-control">
+            <option value="0" label="--"></option>
+
+            <options items="${companyList}" itemValue="id" itemLabel="name"></options>
+
+            <!--
+                        <option value="0">--</option>
+                        <option value="1">--</option>
+                        <option value="1">Apple</option>
+                        <option value="2">Dell</option>
+                        <option value="3">Lenovo</option>
+                        -->
+          </select>
+          <input type="hidden" path="company.name" value="a"/>
+        </div>
+
+
+        <div class="actions"></div>
+              <input ng-if="computer.computer!=null && computer.computer.id!=0" type="submit" value="{{'editComputer.input.submit' | i18n}}" class="btn btn-primary"/>
+              <input ng-if="computer.computer==null || computer.computer.id==0" type="submit" value="{{ 'addComputer.input.submit' | i18n}}" class="btn btn-primary"/>
+          or <a href="/#" class="btn btn-default">{{ 'Cancel.button.text' | i18n}}</a>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

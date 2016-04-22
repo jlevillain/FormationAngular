@@ -4,7 +4,7 @@
   <div id="actions">
     <form class="form-inline" action="" method="GET">
       <input class="form-control" type="search" id="searchbox" name="search"
-             ng-model="submitSearch" ng-model="submitSearch" value="{{main.search}}" placeholder="{{searchComputer.title | i18n}}">
+             ng-model="submitSearch" ng-model="submitSearch" value="{{main.search}}" placeholder="{{'searchComputer.title' | i18n}}">
       <!--
       <input type="hidden" name="page" ng-model="submitPageNumber" value="1">
       <input type="hidden" name="orderBy" ng-model="submitOrderBy" value="{{main.orderBy}}">
@@ -36,7 +36,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="item in main.computerList">
-        <td><a href="UpdateComputer?id={{item.id}}">{{item.name}}</a></td>
+        <td><a href="/#AddComputer?id={{item.id}}">{{item.name}}</a></td>
         <td>{{item.introduced}}</td>
         <td>{{item.discontinued}}</td>
         <td>{{item.company.name}}</td>
