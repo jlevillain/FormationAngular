@@ -31,6 +31,12 @@
         "dist/css/bootstrap.css",
         "dist/js/bootstrap.js"
       ]
+    },
+    "jquery-ui":{
+      "main": [
+        "./jquery-ui.min.js",
+        "./themes/ui-lightness/jquery-ui.min.css"
+      ]
     }
   }
 }
