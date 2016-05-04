@@ -96,33 +96,7 @@
         }
 
       }
-      /*
-      ComputerService.getPage("",1,2,false,5).then(function(data) {
-          vm.page = data;
-          return vm.page;
-      });
-      ComputerService.getNewComputer().then(function(data) {
-          vm.page = data;
-          //console.log(vm.page);
-          return vm.page;
-      });
-      ComputerService.addComputer({id:0, name:"totoutou", introduced:"", discontinued:"",company:{id:0,name:""}}).then(function(data) {
-          vm.page = data;
-          console.log(vm.page);
-          return vm.page;
-      });
-      ComputerService.modifyComputer(50).then(function(data) {
-        vm.page = data;
-        //console.log(vm.page);
-        return vm.page;
-      });
 
-      CompanyService.getAll().then(function(data) {
-          vm.companyList = data;
-          //console.log(vm.companyList);
-          return vm.companyList;
-      });
-      */
       initVariable();
       init();
     }
