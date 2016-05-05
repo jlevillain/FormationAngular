@@ -41,6 +41,6 @@ angular
         i18nServiceProvider.setLocales({
           'default': '../../i18n/resources-locale_en_US.json',
           'en': '../../i18n/resources-locale_en_US.json',
-          'fr-FR': '../../i18n/resources-locale_fr.json',
+          'fr': '../../i18n/resources-locale_fr.json',
       }, true);
     }]);

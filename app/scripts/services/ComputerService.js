@@ -11,9 +11,9 @@
 
    angular.module('formationAngularApp').factory('ComputerService', ComputerService);
 
-   ComputerService.$inject = ['$http'];
+   ComputerService.$inject = ['$http', '$cookies'];
 
-   function ComputerService($http) {
+   function ComputerService($http, $cookies) {
       var service = {
         getAll : getAll,
         getPage : getPage,
@@ -34,17 +34,19 @@
       }
 
       function getAll() {
-        return $http.get(VM+PATH+'/getAll').then(success, error);
+        var lang = $cookies.get('locale').replace('"','').replace('"','');
+        return $http.get(VM+PATH+'/getAll?lang='+lang).then(success, error);
       }
 
       function getPage(search, page, orderBy, isDesc, nbPage) {
-        console.log(search);
+        var lang = $cookies.get('locale').replace('"','').replace('"','');
         return $http.get(VM+PATH+
           '/getAll?search='+search+
           '&page='+page+
           '&orderBy='+orderBy+
           '&isDesc='+isDesc+
-          '&nbPage='+nbPage
+          '&nbPage='+nbPage+
+          "&lang="+lang
           ).then(success, error);
       }
 

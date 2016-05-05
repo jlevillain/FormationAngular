@@ -5,16 +5,17 @@ describe('Service: ComputerService', function () {
   // load the controller's module
   beforeEach(module('formationAngularApp'));
 
-  var ComputerService, httpBackend;
+  var ComputerService, httpBackend, cookies;
 
-  beforeEach(inject(function (_ComputerService_, $httpBackend) {
+  beforeEach(inject(function (_ComputerService_, $httpBackend, $cookies) {
     ComputerService = _ComputerService_;
     httpBackend = $httpBackend;
+    $cookies.put('locale', '"fr"');;
   }));
 
   it('should recuperate all computer', function () {
 
-      httpBackend.expectGET(VM+PATH+'/getAll').respond(200, '');
+      httpBackend.expectGET(VM+PATH+'/getAll?lang=fr').respond(200, '');
       httpBackend.expectGET('views/main.html').respond(200, '');
 
       ComputerService.getAll();
@@ -32,9 +33,9 @@ describe('Service: ComputerService', function () {
       '&page='+page+
       '&orderBy='+orderBy+
       '&isDesc='+isDesc+
-      '&nbPage='+nbPage).respond(200, '');
+      '&nbPage='+nbPage+
+      '&lang=fr').respond(200, '');
     httpBackend.expectGET('views/main.html').respond(200, '');
-
     ComputerService.getPage(search, page, orderBy, isDesc, nbPage);
 
     httpBackend.flush();

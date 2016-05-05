@@ -11,10 +11,10 @@
   angular.module('formationAngularApp')
     .controller('ComputerCtrl', ComputerCtrl);
 
-    ComputerCtrl.$inject = ['$scope', '$window', '$location', 'ComputerService', 'CompanyService', 'i18nService'];
+    ComputerCtrl.$inject = ['$scope', '$window', '$location', '$timeout','ComputerService', 'CompanyService', 'i18nService'];
 
 
-    function ComputerCtrl($scope, $window, $location, ComputerService, CompanyService, i18nService) {
+    function ComputerCtrl($scope, $window, $location, $timeout, ComputerService, CompanyService, i18nService) {
       var vm = this;
       vm.computer = null;
       vm.error = null;
@@ -57,57 +57,59 @@
         	        	}
         	        }, ""+i18nService.getString('Datepicker.message.error')+" "+i18nService.getString('Date.pattern.text'));
 
-        	$().ready(function() {
-        		$("#signupForm").validate({
-        			rules: {
-        				name : "required",
-        				introduced : {
-        					dateControl: true
-        				},
-        				discontinued : {
-        					dateControl: true
-        				}
-        			},
-        			highlight: function(element) {
-        				 var formGroup = $(element).closest('.form-group');
-        				 formGroup.removeClass('has-success').addClass('has-error');
-        				 formGroup.children('label.error').css("opacity",1);
-        			},
-        			success: function(element) {
-                 var formGroup = $(element).closest('.form-group');
-        				 formGroup.removeClass('has-error').addClass('has-success');
-        				 formGroup.children('label.error').css("opacity",0);
-        			}
-        		});
+        $().ready(function() {
+          $("#signupForm").validate({
+            rules: {
+              name : "required",
+              introduced : {
+                dateControl: true
+              },
+              discontinued : {
+                dateControl: true
+              }
+            },
+            highlight: function(element) {
+               var formGroup = $(element).closest('.form-group');
+               formGroup.removeClass('has-success').addClass('has-error');
+               formGroup.children('label.error').css("opacity",1);
+            },
+            success: function(element) {
+               var formGroup = $(element).closest('.form-group');
+               formGroup.removeClass('has-error').addClass('has-success');
+               formGroup.children('label.error').css("opacity",0);
+            }
+          });
+          $timeout(function() {
 
-        		$(function() {
-              $("#introduced").datepicker();
-              $("#introduced").datepicker( "option",$.datepicker.regional[""+i18nService.getString('DatePicker.lang')] );
-              $("#introduced").datepicker("option", "dateFormat", ""+i18nService.getString('Date.pattern.javascript'));
-              //$("#introduced").datepicker("setDate", vm.computer.introduced);
-              $("#introduced").datepicker({
-                onClose : function(selectedDate) {
-                  $('#introduced').trigger('change');
-                  $('#discontinued').trigger('onkeypress');
-                }
-              });
+          $(function() {
+            $("#introduced").datepicker();
+            $("#introduced").datepicker( "option",$.datepicker.regional[""+i18nService.getString('DatePicker.lang')] );
+            $("#introduced").datepicker("option", "dateFormat", ""+i18nService.getString('Date.pattern.javascript'));
+            //$("#introduced").datepicker("setDate", vm.computer.introduced);
+            $("#introduced").datepicker({
+              onClose : function(selectedDate) {
+                $('#introduced').trigger('change');
+                $('#discontinued').trigger('onkeypress');
+              }
             });
-            $(function() {
+          });
+          $(function() {
 
-              $("#discontinued").datepicker();
+            $("#discontinued").datepicker();
 
 
-              $("#discontinued").datepicker( "option",$.datepicker.regional[""+i18nService.getString('DatePicker.lang')] );
-              $("#discontinued").datepicker("option", "dateFormat", ""+i18nService.getString('Date.pattern.javascript'));
-              //$("#discontinued").datepicker("setDate", vm.computer.discontinued);
-              $("#discontinued").datepicker({
-                onClose : function(selectedDate) {
-                  $('#discontinued').trigger('change');
-                  $('#discontinued').trigger('onkeypress');
-                }
-              });
+            $("#discontinued").datepicker( "option",$.datepicker.regional[""+i18nService.getString('DatePicker.lang')] );
+            $("#discontinued").datepicker("option", "dateFormat", ""+i18nService.getString('Date.pattern.javascript'));
+            //$("#discontinued").datepicker("setDate", vm.computer.discontinued);
+            $("#discontinued").datepicker({
+              onClose : function(selectedDate) {
+                $('#discontinued').trigger('change');
+                $('#discontinued').trigger('onkeypress');
+              }
             });
-        	});
+          });
+          }, 1000);
+        });
 
 
       }
