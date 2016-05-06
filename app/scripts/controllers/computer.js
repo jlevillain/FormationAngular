@@ -16,11 +16,14 @@
 
     function ComputerCtrl($scope, $window, $location, $timeout, ComputerService, CompanyService, i18nService) {
       var vm = this;
+      vm.sendForm = sendForm;
       vm.computer = null;
       vm.error = null;
       vm.companyList = null;
 
-      vm.sendForm = function(computer) {
+      init();
+
+      function sendForm(computer) {
         var searchObject = $location.search();
         console.log(computer);
         ComputerService.addComputer(computer).then(function(data) {
@@ -113,7 +116,5 @@
 
 
       }
-
-      init();
     };
 })();

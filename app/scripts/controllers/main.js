@@ -15,6 +15,7 @@
 
     function MainCtrl($scope, $window, $location, ComputerService, CompanyService, i18nService) {
       var vm = this;
+      vm.deleteComputer = deleteComputer;
       vm.page = null;
       vm.companyList = {};
       vm.computerList = {};
@@ -25,7 +26,10 @@
       ];
       vm.pagination = [];
 
-      vm.deleteComputer = function(id) {
+      initVariable();
+      init();
+
+      function deleteComputer(id) {
         var r = $window.confirm(i18nService.getString('Delete.message'));
         if (r == true)
           {
@@ -96,8 +100,5 @@
         }
 
       }
-
-      initVariable();
-      init();
     }
 })();
