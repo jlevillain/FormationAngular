@@ -22,12 +22,12 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
+        controller: 'MainController',
         controllerAs: 'main'
       })
       .when('/AddComputer', {
         templateUrl: 'views/computer.html',
-        controller: 'ComputerCtrl',
+        controller: 'ComputerControleur',
         controllerAs: 'computer'
       })
       .otherwise({

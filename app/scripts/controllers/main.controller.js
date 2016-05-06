@@ -9,11 +9,11 @@
    * Controller of the formationAngularApp
    */
   angular.module('formationAngularApp')
-    .controller('MainCtrl', MainCtrl);
+    .controller('MainController', MainController);
 
-    MainCtrl.$inject = ['$scope', '$window', '$location', 'ComputerService', 'CompanyService', 'i18nService']
+    MainController.$inject = ['$scope', '$window', '$location', 'ComputerService', 'CompanyService', 'i18nService']
 
-    function MainCtrl($scope, $window, $location, ComputerService, CompanyService, i18nService) {
+    function MainController($scope, $window, $location, ComputerService, CompanyService, i18nService) {
       var vm = this;
       vm.deleteComputer = deleteComputer;
       vm.page = null;
