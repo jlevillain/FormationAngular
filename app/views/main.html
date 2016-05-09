@@ -25,13 +25,13 @@
     <tr>
       <!-- Variable declarations for passing labels as parameters -->
       <!-- Table header for Computer Name -->
-
-      <th><a ng-href="/#/?search={{main.search}}&page={{main.pageNumber}}&orderBy=2&isDesc={{(main.isDesc == false)?main.isDesc=true:main.isDesc=false}}&nbPage={{main.nbPage}}">{{ 'Computer.title.name' | i18n }}</a></th>
-      <th><a ng-href="/#/?search={{main.search}}&page={{main.pageNumber}}&orderBy=3&isDesc={{(main.isDesc == false)?main.isDesc=true:main.isDesc=false}}&nbPage={{main.nbPage}}">{{ 'Computer.title.introduced' | i18n }}</a></th>
+      <th><table-header order-by="2" main="main">{{ 'Computer.title.name' | i18n }}</table-header></th>
+      <!-- Table header for Introduced Date -->
+      <th><table-header order-by="3" main="main">{{ 'Computer.title.introduced' | i18n }}</table-header></th>
       <!-- Table header for Discontinued Date -->
-      <th><a ng-href="/#/?search={{main.search}}&page={{main.pageNumber}}&orderBy=4&isDesc={{(main.isDesc == false)?main.isDesc=true:main.isDesc=false}}&nbPage={{main.nbPage}}">{{ 'Computer.title.discontinued' | i18n }}</a></th>
+      <th><table-header order-by="4" main="main">{{ 'Computer.title.discontinued' | i18n }}</table-header></th>
       <!-- Table header for Company -->
-      <th><a ng-href="/#/?search={{main.search}}&page={{main.pageNumber}}&orderBy=6&isDesc={{(main.isDesc == false)?main.isDesc=true:main.isDesc=false}}&nbPage={{main.nbPage}}">{{ 'Computer.title.company' | i18n }}</a></th>
+      <th><table-header order-by="6" main="main">{{ 'Computer.title.company' | i18n }}</table-header></th>
     </tr>
     </thead>
     <tbody>
@@ -45,26 +45,6 @@
             {{ 'deleteComputer.title' | i18n }}
           </a>
         </td></tr>
-        <!--
-           <tr>
-               <td><a href="#" onclick="">ThinkPad T420</a></td>
-               <td>2011-01-01</td>
-               <td>2013-03-04</td>
-               <td>Lenovo</td>
-           </tr>
-           <tr>
-               <td><a href="#">Precision 3500</a></td>
-               <td>2010-05-07</td>
-               <td>2012-06-01</td>
-               <td>Dell</td>
-           </tr>
-           <tr>
-               <td><a href="#">Macbook Air</a></td>
-               <td>2005-05-09</td>
-               <td>2008-06-06</td>
-               <td>Apple</td>
-           </tr>
-           -->
     </tbody>
   </table>
     <div align="center">
