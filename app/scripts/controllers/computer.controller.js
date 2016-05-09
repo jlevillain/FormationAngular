@@ -9,12 +9,12 @@
    * Controller of the formationAngularApp
    */
   angular.module('formationAngularApp')
-    .controller('ComputerControleur', ComputerControleur);
+    .controller('ComputerController', ComputerController);
 
-    ComputerControleur.$inject = ['$scope', '$window', '$location', '$timeout','ComputerService', 'CompanyService', 'i18nService'];
+    ComputerController.$inject = ['$scope', '$window', '$location', '$timeout','ComputerService', 'CompanyService', 'i18nService'];
 
 
-    function ComputerControleur($scope, $window, $location, $timeout, ComputerService, CompanyService, i18nService) {
+    function ComputerController($scope, $window, $location, $timeout, ComputerService, CompanyService, i18nService) {
       var vm = this;
       vm.sendForm = sendForm;
       vm.computer = null;

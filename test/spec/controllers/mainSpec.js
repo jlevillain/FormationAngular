@@ -53,7 +53,7 @@ describe('Controller: MainCtrl', function () {
       getString : function(message) {return "message"}
     };
     createController = function() {
-      return $controller("MainCtrl", {
+      return $controller("MainController", {
         $scope: scope,
         $window : window,
         $location : location,
@@ -110,7 +110,7 @@ describe('Controller: MainCtrl', function () {
     spyOn(window, 'confirm').and.returnValue(true);
 
     MainCtrl.deleteComputer(10);
-    
+
     expect(computerService.deleteComputer).toHaveBeenCalledWith(10);
     expect(window.confirm).toHaveBeenCalled();
     expect(window.location.reload).toHaveBeenCalled();

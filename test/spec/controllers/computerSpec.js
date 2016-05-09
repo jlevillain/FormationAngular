@@ -25,7 +25,7 @@ describe('Controller: ComputerCtrl', function () {
       }
 
       createController = function() {
-        return $controller("ComputerCtrl", {
+        return $controller("ComputerController", {
           $scope: scope,
           $location : location,
           ComputerService : computerService,
