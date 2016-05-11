@@ -27,7 +27,7 @@ angular
       })
       .when('/AddComputer', {
         templateUrl: 'views/computer.html',
-        controller: 'ComputerControleur',
+        controller: 'ComputerController',
         controllerAs: 'computer'
       })
       .otherwise({

@@ -21,7 +21,7 @@
           orderBy:"=",
           main:"="
         },
-        templateUrl:'../../views/directives/table-header.html',
+        templateUrl:'views/directives/table-header.html',
         link:link
       }
 

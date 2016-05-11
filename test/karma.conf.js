@@ -17,6 +17,10 @@ module.exports = function(config) {
       'jasmine'
     ],
 
+    preprocessors: {
+      'app/views/directives/*.html': ['ng-html2js']
+    },
+
     // list of files / patterns to load in the browser
     files: [
       // bower:js
@@ -35,8 +39,16 @@ module.exports = function(config) {
       // endbower
       'app/scripts/**/**/*.js',
       'test/mock/**/*.js',
-      'test/spec/**/*.js'
+      'test/spec/**/*.js',
+      // template
+      'app/views/directives/*.html'
     ],
+
+    ngHtml2JsPreprocessor: {
+          // strip this from the file path
+          stripPrefix:'app/',
+          moduleName:'ngHtml2JsPreprocessorModule'
+    },
 
     // list of files / patterns to exclude
     exclude: [
@@ -59,6 +71,7 @@ module.exports = function(config) {
 
     // Which plugins to enable
     plugins: [
+      'karma-ng-html2js-preprocessor',
       'karma-phantomjs-launcher',
       'karma-jasmine'
     ],
