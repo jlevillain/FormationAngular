@@ -47,8 +47,10 @@
             if(vm.computer.company == null) {
               vm.computer.company = {id:0, name:""}
             }
+            vm.computer.company.id = parseInt(vm.computer.company.id);
           });
         }
+
         $.validator.addMethod(
         	        "dateControl",
         	        function(value, element) {
@@ -88,7 +90,7 @@
             $("#introduced").datepicker();
             $("#introduced").datepicker( "option",$.datepicker.regional[""+i18nService.getString('DatePicker.lang')] );
             $("#introduced").datepicker("option", "dateFormat", ""+i18nService.getString('Date.pattern.javascript'));
-            //$("#introduced").datepicker("setDate", vm.computer.introduced);
+            $("#introduced").datepicker("setDate", vm.computer.introduced);
             $("#introduced").datepicker({
               onClose : function(selectedDate) {
                 $('#introduced').trigger('change');
@@ -103,7 +105,7 @@
 
             $("#discontinued").datepicker( "option",$.datepicker.regional[""+i18nService.getString('DatePicker.lang')] );
             $("#discontinued").datepicker("option", "dateFormat", ""+i18nService.getString('Date.pattern.javascript'));
-            //$("#discontinued").datepicker("setDate", vm.computer.discontinued);
+            $("#discontinued").datepicker("setDate", vm.computer.discontinued);
             $("#discontinued").datepicker({
               onClose : function(selectedDate) {
                 $('#discontinued').trigger('change');
